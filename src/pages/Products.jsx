@@ -7,7 +7,7 @@ import axios from 'axios';
 const Products = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const { addToCart, cartItems } = useCart();
 
   const handleLogOut = () => {
@@ -20,11 +20,9 @@ const Products = () => {
     //   .then((res) => res.json())
     //   .then((data) => setProducts(data));
     const fetchPdts = async () => {
-      const res = await axios.get(
-      'https://fakestoreapi.com/products'
-    );
-    setProducts(res.data);
-    }
+      const res = await axios.get('https://fakestoreapi.com/products');
+      setProducts(res.data);
+    };
     fetchPdts();
   }, []);
 
@@ -47,7 +45,13 @@ const Products = () => {
 
               <button
                 className="bg-gray-500 mt-3 w-full py-1 rounded-full font-semibold text-white"
-                onClick={() => navigate(`/products/${p.id}`)}
+                onClick={() => {
+                  if (user) {
+                    navigate(`/products/${p.id}`);
+                  } else {
+                    navigate('/login');
+                  }
+                }}
               >
                 See product Details
               </button>
