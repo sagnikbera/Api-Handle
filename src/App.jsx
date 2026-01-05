@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import { FontFeatureValuesRule } from './../node_modules/lightningcss/node/ast.d';
 
 function App() {
-
   return (
     <>
-        <div className='bg-amber-300'>
-          App
-        </div>
+      <div></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
