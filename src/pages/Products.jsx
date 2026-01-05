@@ -10,9 +10,13 @@ const Products = () => {
   const { logout, user } = useAuth();
   const { addToCart, cartItems } = useCart();
 
+  const [currPage , setCurrPage] = useState(1);
+  const ipp = 4;
+  const [x , setx] = useState(0);
+
   const handleLogOut = () => {
     logout();
-    navigate('/login');
+    navigate('/products');
   };
 
   useEffect(() => {
@@ -26,10 +30,21 @@ const Products = () => {
     fetchPdts();
   }, []);
 
+  // let iLast = currPage * ipp;
+  // let iFirst = iLast - ipp;
+  // let currProduct = products.slice(iFirst , iLast);
+  // let totalP = Math.ceil(products.length / ipp);
+
+  const loadMore = () => {
+    setx((prev) => prev + ipp);
+  }
+
+  const isEnplty = x+ipp >= products.length;
+
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {products.map((p) => {
+        {products.slice(0,x+ipp).map((p) => {
           const isAdded = cartItems.find((item) => item.id === p.id);
 
           return (
@@ -70,12 +85,46 @@ const Products = () => {
         })}
       </div>
 
-      <button
-        className="mt-6 px-6 py-2 bg-black text-white rounded"
+      <button className={`mt-6 px-6 py-2 bg-black text-white rounded mx-auto block ${isEnplty ? 'bg-[#dadada] cursor-not-allowed' : 'bg-black' }`}
+      onClick={loadMore}
+      disabled={isEnplty}
+      >
+        Load More
+      </button>
+
+      {/* <div className='mt-6 flex justify-center gap-2'>
+        {
+          Array.from(
+            {length : totalP} , (_,i) => (
+              <button
+              key={i}
+              onClick={()=>setCurrPage(i+1)}
+              className={`px-3 py-1 border rounded ${currPage === i+1 ? 'bg-black text-white' : 'bg-white text-black'}`}
+              >
+                {i+1}
+              </button>
+          )
+          )
+        }
+      </div> */}
+
+    {
+      user ? <>
+       <button
+        className="mt-6 px-6 py-2 bg-black text-white rounded mx-auto block"
         onClick={handleLogOut}
       >
         Log Out
       </button>
+      </> : <>
+        <button
+          onClick={() => navigate('/login')}
+          className="mt-6 px-6 py-2 bg-blue-500 text-white rounded mx-auto block"
+        >
+          Login
+        </button>
+      </>
+    }
     </div>
   );
 };
