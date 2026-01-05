@@ -20,10 +20,15 @@ const Products = () => {
 
   return (
     <div className="p-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {products.map((p) => (
           <div key={p.id} onClick={() => navigate(`/products/${p.id}`)}>
-            <h2 className="font-semibold">{p.title}</h2>
+            <img
+              src={p?.image}
+              alt={p?.title}
+              className="w-64 h-64 object-contain"
+            />
+            <h2 className="font-semibold truncate">{p.title}</h2>
             <p className="text-gray-600">{p.price}</p>
           </div>
         ))}
