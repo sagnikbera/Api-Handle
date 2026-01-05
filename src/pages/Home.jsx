@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -8,26 +8,22 @@ const Home = () => {
   const { user, logout } = useAuth();
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => setCount(data.length));
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((data) => setCount(data.length));
   }, []);
 
   const handleShowProducts = () => {
     if (user) {
-      navigate("/products");
+      navigate('/products');
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-gray-100">
-
-      <h1 className="text-3xl font-bold">
-        Total Products: {count}
-      </h1>
-
+      <h1 className="text-3xl font-bold">Total Products: {count}</h1>
 
       <button
         onClick={handleShowProducts}
@@ -46,13 +42,12 @@ const Home = () => {
         </button>
       ) : (
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate('/login')}
           className="px-6 py-2 bg-blue-500 text-white rounded"
         >
           Login
         </button>
       )}
-
     </div>
   );
 };
