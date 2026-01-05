@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import { FontFeatureValuesRule } from './../node_modules/lightningcss/node/ast.d';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
-      <div></div>
+      <Home />
     </>
   );
 }
