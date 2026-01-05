@@ -14,11 +14,11 @@ const Home = () => {
   }, []);
 
   const handleShowProducts = () => {
-    if (user) {
+    // if (user) {
       navigate('/products');
-    } else {
-      navigate('/login');
-    }
+    // } else {
+    //   navigate('/login');
+    // }
   };
 
   return (
