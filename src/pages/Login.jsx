@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,15 +10,23 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    // const res = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ email, password }),
+    // });
 
-    const data = await res.json();
+    // const data = await res.json();
 
-    if (data.access_token) {
+    const res = await axios.post(
+        'https://api.escuelajs.co/api/v1/auth/login',
+        {
+            email: email,
+            password: password
+        }
+    )
+
+    if (res.data.access_token) {
       login(data);
       navigate('/products');
     } else {
