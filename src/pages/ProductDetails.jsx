@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RiStarFill, RiStarHalfFill, RiStarLine } from 'react-icons/ri';
+import axios from 'axios';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -9,9 +10,11 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-        const data = await res.json();
-        setProduct(data);
+        // const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+        // const data = await res.json();
+        // setProduct(data);
+        const res = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        setProduct(res.data);
       } catch (error) {
         console.error('Error :', error);
       }
