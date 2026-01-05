@@ -24,7 +24,7 @@ const Login = () => {
     });
 
     if (res.data.access_token) {
-      login(data);
+      login(res.data);
       navigate('/products');
     } else {
       alert('Invalid username password');
