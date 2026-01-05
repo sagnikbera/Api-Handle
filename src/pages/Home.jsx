@@ -15,7 +15,7 @@ const Home = () => {
 
   const handleShowProducts = () => {
     // if (user) {
-      navigate('/products');
+    navigate('/products');
     // } else {
     //   navigate('/login');
     // }
