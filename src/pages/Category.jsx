@@ -84,7 +84,7 @@ const Category = () => {
                   className={`mt-3 w-full py-1 rounded-full font-semibold text-white
                                 ${
                                   isAdded
-                                    ? 'ng-gray-400 cursor-not-allowed'
+                                    ? 'bg-gray-400 cursor-not-allowed'
                                     : 'bg-blue-500'
                                 }
                                 `}
