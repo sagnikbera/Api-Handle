@@ -17,7 +17,7 @@ const App = () => {
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
-        <Nav/>
+          <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -45,13 +45,11 @@ const App = () => {
               path="/category"
               element={
                 <ProtectedRoute>
-                  <Category/>
+                  <Category />
                 </ProtectedRoute>
               }
             />
           </Routes>
-
-          
 
           <CartIcon />
         </BrowserRouter>
