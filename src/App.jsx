@@ -9,12 +9,14 @@ import CartIcon from './components/CartIcon';
 
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import Nav from './components/Nav';
 
 const App = () => {
   return (
     <AuthProvider>
       <CartProvider>
         <BrowserRouter>
+        <Nav/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
