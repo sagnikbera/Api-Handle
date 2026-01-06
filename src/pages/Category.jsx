@@ -1,9 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Category = () => {
     const [products , setProducts] = useState([]);
     const [cat , setCat] = useState("All");
+
+    const navigate = useNavigate();
+    const { addToCart , cartItems } =  useCart();
 
     useEffect(()=> {
         const fetchData = async () => {
@@ -19,6 +24,8 @@ const Category = () => {
     // console.log(allCat);
     // console.log(catSet);
     // console.log(uniqueSet);
+
+    const filtPdts = cat === "All" ? products : products.filter((item) => item.category === cat);
 
 
   return (
@@ -42,7 +49,54 @@ const Category = () => {
             ))
         }
       </div>
+       {/* display  */} 
+       <div className='p-6'>
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+                {
+                    filtPdts.map((p) => {
+                        const isAdded = cartItems.find((item) => item.id === p.id);
+                    
+                    return (
+                        <div key={p.id} className='border p-4 rounded'>
+                            <img 
+                            src={p.image} 
+                            alt={p.title} 
+                            className='w-64 h-64 object-contain mx-auto'
+                            />
 
+                            <h2 className='font-semibold truncate'>{p.title}</h2>
+                            <p className='text-gray-600'>${p.price}</p>
+
+                            <button
+                            className='bg-gray-500 mt-3 w-full py-1 rounded-full font-semibold text-white'
+                            onClick={()=>{
+                                if(user) {
+                                    navigate(`/products/${p.id}`);
+                                } else {
+                                    navigate('/login');
+                                }
+                            }}
+                            >
+                                See Product Details
+                            </button>
+
+                            <button
+                            disabled = {isAdded}
+                            className={`mt-3 w-full py-1 rounded-full font-semibold text-white
+                                ${
+                                isAdded ? 'ng-gray-400 cursor-not-allowed' : 'bg-blue-500'
+                                }
+                                `}
+                             onClick={() => addToCart(p)}   
+                            >
+                                {isAdded ? 'Added' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    )
+                    })
+                }
+            </div>
+       </div>
     </div>
   )
 }
