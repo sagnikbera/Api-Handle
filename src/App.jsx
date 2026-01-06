@@ -10,6 +10,7 @@ import CartIcon from './components/CartIcon';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Nav from './components/Nav';
+import Category from './pages/Category';
 
 const App = () => {
   return (
@@ -39,7 +40,18 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/category"
+              element={
+                <ProtectedRoute>
+                  <Category/>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
+
+          
 
           <CartIcon />
         </BrowserRouter>

@@ -8,7 +8,7 @@ const Nav = () => {
 
     const handleLogout = () => {
         logout();
-        Navigate('/proucts');;
+        navigantion('/proucts');;
     }
 
   return (
